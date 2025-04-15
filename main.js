@@ -2,20 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import bcrypt from 'bcrypt';
+import { nanoid } from 'nanoid';
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-
-const logs = (req, res, next) => {
-  console.log(`${req.method} - ${req.url}`);
-  next();
-}
-
-app.use(logs());
-
 
 const user_schema = new mongoose.Schema({
   name: { type: String, required: true, minLength: 6 },
@@ -82,6 +75,9 @@ app.post('/user/login', async (req, res) => {
       message: "Invalid email or password"
     })
   }
+
+  const genID = await nanoid(8);
+  console.log(genID);
 
   res.cookie('token', user._id, {
     httpOnly: true, 
