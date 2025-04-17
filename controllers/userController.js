@@ -4,7 +4,15 @@ import { nanoid } from 'nanoid';
 
 // GET
 export const getDashboard = (req, res) => {
+
+  if(!req.user){
+    return res.json({
+      success: false,
+      message: "User not authenticated"
+    })
+  }
   const user = req.user;
+
   res.json({
     success: true,
     "user": user.name,
