@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 
-const RestrictToLoggedInUserOnly = (req, res, next) => {
+const RestrictToLoggedInUserOnly = async (req, res, next) => {
 
   const id = req.cookies.token;
 
@@ -13,7 +13,7 @@ const RestrictToLoggedInUserOnly = (req, res, next) => {
     })
   }
 
-  const user = User.findOne({ _id: id })
+  const user = await User.findOne({ _id: id })
 
   if(!user) {
     return res

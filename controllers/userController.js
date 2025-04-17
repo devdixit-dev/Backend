@@ -3,7 +3,14 @@ import bcrypt from 'bcrypt';
 import { nanoid } from 'nanoid';
 
 // GET
-export const getDashboard = () => {}
+export const getDashboard = (req, res) => {
+  const user = req.user;
+  res.json({
+    success: true,
+    "user": user.name,
+    "email": user.email
+  })
+}
 
 // POST
 export const SignUp = async (req, res) => {
