@@ -19,7 +19,7 @@ app.use('/user', userRouter)
 
 // home route
 app.get('/', (req, res) => {
-  res.send('Home page or / page');
+  res.render('login');
 });
 
 app.get('/signup', (req, res) => {

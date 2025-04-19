@@ -4,10 +4,13 @@ import { nanoid } from 'nanoid';
 
 // GET
 export const getDashboard = (req, res) => {
-
   const user = req.user
   res.render('dashboard', { name: user.name })
+}
 
+// create new post
+export const createNewPost = (req, res) => {
+  
 }
 
 // POST
