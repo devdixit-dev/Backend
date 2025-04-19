@@ -5,19 +5,9 @@ import { nanoid } from 'nanoid';
 // GET
 export const getDashboard = (req, res) => {
 
-  if(!req.user){
-    return res.json({
-      success: false,
-      message: "User not authenticated"
-    })
-  }
-  const user = req.user;
+  const user = req.user
+  res.render('dashboard', { name: user.name })
 
-  res.json({
-    success: true,
-    "user": user.name,
-    "email": user.email
-  })
 }
 
 // POST
@@ -28,19 +18,15 @@ export const SignUp = async (req, res) => {
   const user = await User.findOne({ email });
 
   if(user){
-    return res.status(404).json({
-      success: false,
-      message: "User already exist"
-    });
+    console.log({ success: false, message: 'User already exist' })
+    res.redirect('/login')
   }
 
   const decodePassword = await bcrypt.hash(password, 10);
 
   await User.create({ name, email, password: decodePassword })
-  return res.status(201).json({
-    success: true,
-    message: "User registered"
-  });
+  console.log({ success: true, message: 'User registered successfully' })
+  res.redirect('/login')
 
 };
 
@@ -85,10 +71,8 @@ export const Login = async (req, res) => {
     sameSite: true,
     maxAge: 20 * 60 * 1000 // 20min
   })
-  .json({
-    success: true,
-    message: "Log in successfully"
-  })
+  console.log({ success: true, message: "Log in successfully" })
+  res.redirect('/user/dashboard')
 };
 
 export const Logout = async (req, res) => {
@@ -117,8 +101,5 @@ export const Logout = async (req, res) => {
     secure: true
   });
 
-  return res.status(200).json({
-    success: true,
-    message: "User logged out"
-  })
+  res.redirect('/login')
 };

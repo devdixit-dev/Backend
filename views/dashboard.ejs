@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>User Dashboard</title>
+</head>
+
+<body class="w-screen h-screen bg-zinc-800 text-white px-4">
+  <div class="flex justify-between items-center">
+    <h2 class="text-xl">Hello, <%= name %> 👋</h2>
+    <form action="/user/logout" method="post">
+      <button type="submit" class="mt-6 px-4 py-2 bg-blue-500 rounded-lg cursor-pointer">Logout</button>
+    </form>
+  </div>
+</body>
+
+</html>

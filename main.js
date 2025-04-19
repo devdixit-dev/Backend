@@ -30,4 +30,8 @@ app.get('/login', (req, res) => {
   res.render('login')
 });
 
+app.get('/user/dashboard', (req, res) => {
+  res.render('dashboard')
+});
+
 app.listen(port, () => { console.log(`Server is running on port ${port}`) });
