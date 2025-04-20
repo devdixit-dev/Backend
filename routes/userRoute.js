@@ -1,5 +1,5 @@
 import express from 'express';
-import { createNewPost, getDashboard, Login, Logout, SignUp } from '../controllers/userController.js';
+import { createNewPost, getDashboard, Login, Logout, SignUp, userLike } from '../controllers/userController.js';
 import RestrictToLoggedInUserOnly from '../middlewares/auth.js';
 
 const userRouter = express.Router();
@@ -10,8 +10,10 @@ userRouter.post('/login', Login)
 
 userRouter.get('/dashboard', RestrictToLoggedInUserOnly, getDashboard);
 
-userRouter.post('/post', RestrictToLoggedInUserOnly, createNewPost)
+userRouter.post('/post', RestrictToLoggedInUserOnly, createNewPost);
 
-userRouter.post('/logout', Logout)
+userRouter.get('/like/:id', RestrictToLoggedInUserOnly, userLike);
+
+userRouter.post('/logout', RestrictToLoggedInUserOnly, Logout);
 
 export default userRouter;

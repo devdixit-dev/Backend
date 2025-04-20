@@ -26,6 +26,23 @@ export const createNewPost = async (req, res) => {
 
 }
 
+// like the post
+export const userLike = async (req, res) => {
+  let post = await Post.findOne({ _id: req.params.id });
+
+
+  if(post.likes.indexOf(req.user._id) === -1){
+    post.likes.push(req.user._id);
+  }
+  else{
+    post.likes.indexOf(req.user._id)
+  }
+
+  await post.save();
+
+  res.redirect('/user/dashboard', {post})
+}
+
 // POST
 export const SignUp = async (req, res) => {
 
