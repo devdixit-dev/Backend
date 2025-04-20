@@ -1,16 +1,29 @@
 import User from "../models/User.js";
+import Post from "../models/Post.js";
 import bcrypt from 'bcrypt';
 import { nanoid } from 'nanoid';
 
 // GET
-export const getDashboard = (req, res) => {
-  const user = req.user
-  res.render('dashboard', { name: user.name })
+export const getDashboard = async (req, res) => {
+  const user = await User.findOne({ email: req.user.email }).populate("posts")
+  res.render('dashboard', { user })
 }
 
 // create new post
-export const createNewPost = (req, res) => {
-  
+export const createNewPost = async (req, res) => {
+
+  const {content} = req.body;
+
+  const user = req.user
+  let post = await Post.create({
+    user: user._id,
+    content,
+  });
+
+  user.posts.push(post._id);
+  await user.save();
+  res.redirect('/user/dashboard');
+
 }
 
 // POST
