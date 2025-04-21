@@ -6,11 +6,7 @@ const RestrictToLoggedInUserOnly = async (req, res, next) => {
 
   if(!id) {
     return res
-    .status(404)
-    .json({
-      success: false,
-      message: "Unauthorized login detected"
-    })
+    .redirect('/login')
   }
 
   const user = await User.findOne({ _id: id })

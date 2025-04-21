@@ -26,21 +26,21 @@ export const createNewPost = async (req, res) => {
 
 }
 
-// like the post
+// user like the post
 export const userLike = async (req, res) => {
-  let post = await Post.findOne({ _id: req.params.id });
+  const user = req.user
+  let post = await Post.findOne({_id: req.params.id}).populate('user');
 
-
-  if(post.likes.indexOf(req.user._id) === -1){
-    post.likes.push(req.user._id);
+  if(post.likes.indexOf(user._id) === -1){
+    post.likes.push(user._id)
   }
   else{
-    post.likes.indexOf(req.user._id)
+    post.likes.splice(post.likes.indexOf(user._id), 1); // find that one user and remove it from an array
   }
 
   await post.save();
 
-  res.redirect('/user/dashboard', {post})
+  res.redirect('/user/dashboard')
 }
 
 // POST

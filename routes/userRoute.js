@@ -12,7 +12,7 @@ userRouter.get('/dashboard', RestrictToLoggedInUserOnly, getDashboard);
 
 userRouter.post('/post', RestrictToLoggedInUserOnly, createNewPost);
 
-userRouter.get('/like/:id', RestrictToLoggedInUserOnly, userLike);
+userRouter.get('/like/:id', RestrictToLoggedInUserOnly, userLike)
 
 userRouter.post('/logout', RestrictToLoggedInUserOnly, Logout);
 
