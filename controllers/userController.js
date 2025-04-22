@@ -50,9 +50,31 @@ export const editPost = async (req, res) => {
   res.render('edit', {post})
 }
 
+// get update post
 export const updatePost = async (req, res) => {
   let post = await Post.findOneAndUpdate({_id: req.params.id}, {content: req.body.content});
   res.redirect('/user/dashboard')
+}
+
+// get - profile page
+export const getProfile = async (req, res) => {
+  const user = req.user;
+
+  res.render('profile', {user});
+}
+
+// post - update user info
+export const updateInfo = async (req, res) => {
+  const user = req.user;
+  const { name, email } = req.body;
+
+  const updateName = await User.findOneAndUpdate({ _id: user._id }, {name: name});
+  const updateEmail = await User.findOneAndUpdate({ _id: user._id }, {email: email});
+
+  user.save();
+
+  res.redirect('/user/profile')
+
 }
 
 // POST

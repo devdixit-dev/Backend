@@ -11,9 +11,12 @@
 <body class="w-screen h-screen bg-zinc-800 text-white px-4">
   <div class="flex justify-between items-center text-center">
     <h2 class="text-lg">Hello, <%= user.name %> 👋</h2>
-    <form action="/user/logout" method="post">
-      <button type="submit" class="mt-4 text-sm px-4 py-2 bg-red-500 rounded-sm cursor-pointer">Logout</button>
-    </form>
+    <div class="flex justify-center items-center mt-4 gap-6 ">
+      <a href="/user/profile" class="hover:border-b-2 hover:border-zinc-500 hover:pb-1 hover:text-blue-500">Profile</a>
+      <form action="/user/logout" method="post">
+        <button type="submit" class="text-sm px-4 py-2 bg-red-500 rounded-sm cursor-pointer">Logout</button>
+      </form>
+    </div>
   </div>
 
   <div>
@@ -33,17 +36,25 @@
 
       <% user.posts.reverse().forEach(function(post) { %>
         <div class="post w-1/3 p-2 border-[1px] border-zinc-700 mt-4 rounded-lg">
-          <h4 class="text-md mb-2 text-blue-500"> <%= user.name %> </h4>
-          <p class="text-sm tracking-tight"> <%= post.content %> </p>
+          <h4 class="text-md mb-2 text-blue-500">
+            @<%= user.name.toLowerCase() %>
+          </h4>
+          <p class="text-sm tracking-tight">
+            <%= post.content %>
+          </p>
           <div class="flex mt-2 text-sm gap-4">
             <div class="flex gap-1">
-              <a href="/user/like/<%= post._id %>" class="text-blue-500"><%= post.likes.indexOf(user._id) === -1 ? 'Like' : 'Unlike' %></a>
-              <p><%= post.likes.length %></p>
+              <a href="/user/like/<%= post._id %>" class="text-blue-500">
+                <%= post.likes.indexOf(user._id)===-1 ? 'Like' : 'Unlike' %>
+              </a>
+              <p>
+                <%= post.likes.length %>
+              </p>
             </div>
             <a href="/user/edit/<%= post._id %>" class="text-zinc-500">edit</a>
           </div>
         </div>
-        
+
         <% }) %>
     </div>
   </div>

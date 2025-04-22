@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Profile</title>
+</head>
+
+<body class="w-screen h-screen bg-zinc-800 text-white px-4">
+  <div class="flex justify-between items-center text-center">
+    <h2 class="text-lg">Hello, <%= user.name %> 👋</h2>
+    <div class="flex justify-center items-center mt-4 gap-6 ">
+      <a href="/user/dashboard"
+        class="hover:border-b-2 hover:border-zinc-500 hover:pb-1 hover:text-blue-500">Dashboard</a>
+      <form action="/user/logout" method="post">
+        <button type="submit" class="text-sm px-4 py-2 bg-red-500 rounded-sm cursor-pointer">Logout</button>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="mb-4">Your Profile</h2>
+    <form action="/user/update" method="post" class="flex flex-col gap-2">
+      <p>Name</p>
+      <input type="text" name="name" class="p-2 border-2 w-80 border-zinc-700 outline-none" value=<%=user.name %>></input>
+      <p>Email</p>
+      <input type="email" name="email" class="p-2 border-2 w-80 border-zinc-700 outline-none" value=<%=user.email
+        %>></input>
+      <button type="submit"
+        class="w-30 flex justify-center items-center text-sm py-2 px-4 mt-4 bg-yellow-500 text-black rounded-sm cursor-pointer">Update</button>
+      <p class="flex mt-2 gap-2">Need to change password?<a href="" class="text-red-500 hover:pb-1">Change password</a>
+      </p>
+    </form>
+  </div>
+</body>
+
+</html>
