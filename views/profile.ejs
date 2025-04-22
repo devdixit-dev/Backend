@@ -5,26 +5,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    #file-upload {
+      display: none;
+    }
+
+    .file-label {
+      padding: 0.5rem;
+      border: 2px solid #3f3f46;
+      /* zinc-700 */
+      width: 320px;
+      /* w-80 */
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      background-color: #f4f4f5;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .file-label:hover {
+      background-color: #e4e4e7;
+      /* zinc-200 */
+    }
+  </style>
   <title>Profile</title>
 </head>
 
 <body class="w-screen h-screen bg-zinc-800 text-white px-4">
   <div class="flex justify-between items-center text-center">
-    <h2 class="text-lg">Hello, <%= user.name %> 👋</h2>
+    <h2 class="text-2xl mt-2">Your Profile</h2>
+    <a href="/user/dashboard"
+      class="hover:border-b-2 hover:border-zinc-500 hover:pb-1 hover:text-blue-500">Dashboard</a>
     <div class="flex justify-center items-center mt-4 gap-6 ">
-      <a href="/user/dashboard"
-        class="hover:border-b-2 hover:border-zinc-500 hover:pb-1 hover:text-blue-500">Dashboard</a>
       <form action="/user/logout" method="post">
         <button type="submit" class="text-sm px-4 py-2 bg-red-500 rounded-sm cursor-pointer">Logout</button>
       </form>
     </div>
   </div>
 
-  <div>
-    <h2 class="mb-4">Your Profile</h2>
-    <form action="/user/update" method="post" class="flex flex-col gap-2">
+  <div class="mt-4">
+    <form action="/user/update" method="post" class="flex flex-col gap-2" enctype="multipart/form-data">
+      <p>Profile Picture</p>
+      <input type="file" name="avatar" class="p-2 border-2 w-80 border-zinc-700 outline-none">
       <p>Name</p>
-      <input type="text" name="name" class="p-2 border-2 w-80 border-zinc-700 outline-none" value=<%=user.name %>></input>
+      <input type="text" name="name" class="p-2 border-2 w-80 border-zinc-700 outline-none" value=<%=user.name
+        %>></input>
       <p>Email</p>
       <input type="email" name="email" class="p-2 border-2 w-80 border-zinc-700 outline-none" value=<%=user.email
         %>></input>

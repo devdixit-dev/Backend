@@ -1,6 +1,7 @@
 import express from 'express';
 import { createNewPost, editPost, getDashboard, getProfile, Login, Logout, SignUp, updateInfo, updatePost, userLike } from '../controllers/userController.js';
 import RestrictToLoggedInUserOnly from '../middlewares/auth.js';
+import upload from '../utills/multer.js';
 
 const userRouter = express.Router();
 
@@ -20,7 +21,7 @@ userRouter.post('/update/:id', RestrictToLoggedInUserOnly, updatePost);
 
 userRouter.get('/profile', RestrictToLoggedInUserOnly, getProfile);
 
-userRouter.post('/update', RestrictToLoggedInUserOnly, updateInfo);
+userRouter.post('/update', upload.single('avatar'), RestrictToLoggedInUserOnly, updateInfo);
 
 userRouter.post('/logout', RestrictToLoggedInUserOnly, Logout);
 

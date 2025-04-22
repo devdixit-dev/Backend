@@ -66,14 +66,17 @@ export const getProfile = async (req, res) => {
 // post - update user info
 export const updateInfo = async (req, res) => {
   const user = req.user;
+  const imageName = req.file.filename;
+
   const { name, email } = req.body;
 
+  const updateAvatar = await User.findOneAndUpdate({ _id: user._id }, {profilePic: imageName});
   const updateName = await User.findOneAndUpdate({ _id: user._id }, {name: name});
   const updateEmail = await User.findOneAndUpdate({ _id: user._id }, {email: email});
 
   user.save();
 
-  res.redirect('/user/profile')
+  res.redirect('/user/dashboard')
 
 }
 

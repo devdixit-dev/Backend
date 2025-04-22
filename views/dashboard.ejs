@@ -5,14 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <title>User Dashboard</title>
+  <title>Dashboard</title>
 </head>
 
 <body class="w-screen h-screen bg-zinc-800 text-white px-4">
   <div class="flex justify-between items-center text-center">
     <h2 class="text-lg">Hello, <%= user.name %> 👋</h2>
     <div class="flex justify-center items-center mt-4 gap-6 ">
-      <a href="/user/profile" class="hover:border-b-2 hover:border-zinc-500 hover:pb-1 hover:text-blue-500">Profile</a>
+      <div class="w-12 h-12 rounded-md">
+        <a href="/user/profile"><img src="/uploads/<%= user.profilePic %>" class="w-full h-full border-2 hover:border-blue-500 rounded-full p-1"></a>
+      </div>
       <form action="/user/logout" method="post">
         <button type="submit" class="text-sm px-4 py-2 bg-red-500 rounded-sm cursor-pointer">Logout</button>
       </form>
