@@ -43,6 +43,18 @@ export const userLike = async (req, res) => {
   res.redirect('/user/dashboard')
 }
 
+// edit the post
+export const editPost = async (req, res) => {
+  let post = await Post.findOne({_id: req.params.id}).populate('user');
+
+  res.render('edit', {post})
+}
+
+export const updatePost = async (req, res) => {
+  let post = await Post.findOneAndUpdate({_id: req.params.id}, {content: req.body.content});
+  res.redirect('/user/dashboard')
+}
+
 // POST
 export const SignUp = async (req, res) => {
 

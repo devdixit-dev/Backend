@@ -40,7 +40,7 @@
               <a href="/user/like/<%= post._id %>" class="text-blue-500"><%= post.likes.indexOf(user._id) === -1 ? 'Like' : 'Unlike' %></a>
               <p><%= post.likes.length %></p>
             </div>
-            <a href="" class="text-zinc-500">edit</a>
+            <a href="/user/edit/<%= post._id %>" class="text-zinc-500">edit</a>
           </div>
         </div>
         
