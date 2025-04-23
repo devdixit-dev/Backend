@@ -3,7 +3,13 @@ import Post from "../models/Post.js";
 import bcrypt from 'bcrypt';
 import { nanoid } from 'nanoid';
 
-// GET
+// get home - see all posts
+export const getAllPosts = async (req, res) => {
+  const posts = await Post.find();
+  res.render('home', {posts});
+}
+
+// get 
 export const getDashboard = async (req, res) => {
   const user = await User.findOne({ email: req.user.email }).populate("posts")
   res.render('dashboard', { user })

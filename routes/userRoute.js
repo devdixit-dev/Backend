@@ -1,9 +1,11 @@
 import express from 'express';
-import { createNewPost, editPost, getDashboard, getProfile, Login, Logout, SignUp, updateInfo, updatePost, userLike } from '../controllers/userController.js';
+import { createNewPost, editPost, getAllPosts, getDashboard, getProfile, Login, Logout, SignUp, updateInfo, updatePost, userLike } from '../controllers/userController.js';
 import RestrictToLoggedInUserOnly from '../middlewares/auth.js';
 import upload from '../utills/multer.js';
 
 const userRouter = express.Router();
+
+userRouter.get('/', getAllPosts);
 
 userRouter.post('/signup', SignUp);
 

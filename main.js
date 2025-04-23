@@ -24,16 +24,15 @@ app.use(cookieParser());
 
 app.use('/user', userRouter)
 
-// home route
 app.get('/', (req, res) => {
-  res.render('login');
-});
+  res.redirect('/user')
+})
 
-app.get('/signup', (req, res) => {
+app.get('/user/signup', (req, res) => {
   res.render('signup')
 });
 
-app.get('/login', (req, res) => {
+app.get('/user/login', (req, res) => {
   res.render('login')
 });
 
