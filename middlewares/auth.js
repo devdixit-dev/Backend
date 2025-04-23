@@ -6,7 +6,7 @@ const RestrictToLoggedInUserOnly = async (req, res, next) => {
 
   if(!id) {
     return res
-    .redirect('/login')
+    .redirect('/user/login')
   }
 
   const user = await User.findOne({ _id: id })

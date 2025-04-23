@@ -8,12 +8,13 @@
   <title>Dashboard</title>
 </head>
 
-<body class="w-screen h-screen bg-zinc-800 text-white px-4">
+<body class="w-screen h-screen bg-zinc-800 text-white px-6 py-4">
   <div class="flex justify-between items-center text-center">
-    <h2 class="text-lg">Hello, <%= user.name %> 👋</h2>
-    <div class="flex justify-center items-center mt-4 gap-6 ">
+    <h2 class="text-2xl">Hello, <%= user.name %> 👋</h2>
+    <div class="flex justify-center items-center gap-6 ">
       <div class="w-12 h-12 rounded-md">
-        <a href="/user/profile"><img src="/uploads/<%= user.profilePic %>" class="w-full h-full border-2 hover:border-blue-500 rounded-full p-1"></a>
+        <a href="/user/profile"><img src="/uploads/<%= user.profilePic %>"
+            class="w-full h-full border-2 hover:border-blue-500 rounded-full p-1"></a>
       </div>
       <form action="/user/logout" method="post">
         <button type="submit" class="text-sm px-4 py-2 bg-red-500 rounded-sm cursor-pointer">Logout</button>
@@ -22,11 +23,11 @@
   </div>
 
   <div>
-    <h2 class="mb-4">You can create a new post</h2>
+    <h2 class="mb-2">You can create a new post</h2>
     <form action="/user/post" method="post">
       <textarea name="content"
-        class="w-1/3 min-h-30 px-4 py-3 outline-none resize-none bg-transparent border-2 border-zinc-500 rounded-md"
-        placeholder="What's on your mind?"></textarea>
+        class="w-1/4 min-h-60 px-4 py-3 outline-none resize-none bg-transparent border-2 border-zinc-700 rounded-md mt-4"
+        placeholder="what's on your mind?"></textarea>
       <button type="submit" class="block text-sm w-40 mt-4 px-4 py-2 bg-blue-500 rounded-sm cursor-pointer">Create new
         post</button>
     </form>
@@ -37,23 +38,29 @@
     <div class="post-container w-[100%] m-auto flex gap-4 flex-wrap">
 
       <% user.posts.reverse().forEach(function(post) { %>
-        <div class="post w-1/6 p-2 border-[1px] border-zinc-700 mt-4 rounded-lg">
-          <h4 class="text-md mb-2 text-blue-500">
-            @<%= user.name.toLowerCase() %>
-          </h4>
-          <p class="text-sm tracking-tight">
+        <div class="post w-1/6 p-2 border-2 border-zinc-700 mt-4 rounded-lg">
+          <div class="flex justify-between">
+            <h4 class="text-sm text-blue-500">
+              @<%= user.name.toLowerCase() %>
+            </h4>
+          </div>
+          <p class="text-sm tracking-tight text-[19px]">
             <%= post.content %>
           </p>
-          <div class="flex mt-2 text-sm gap-4">
+          <div class="flex mt-4 text-sm gap-10">
             <div class="flex gap-1">
               <a href="/user/like/<%= post._id %>" class="text-blue-500">
-                <%= post.likes.indexOf(user._id)===-1 ? 'Like' : 'Unlike' %>
+                <img src="<%= post.likes.indexOf(user._id)===-1 ? '/images/unlike.png' : '/images/like.png' %>"
+                  width="20">
               </a>
               <p>
                 <%= post.likes.length %>
               </p>
             </div>
-            <a href="/user/edit/<%= post._id %>" class="text-zinc-500">edit</a>
+            <a href="/user/edit/<%= post._id %>" class="text-zinc-500 flex gap-1">
+              <img src="/images/pencil.png" width="18">
+              <p>edit</p>
+            </a>
           </div>
         </div>
 
